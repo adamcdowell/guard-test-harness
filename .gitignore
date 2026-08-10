@@ -1,0 +1,4 @@
+node_modules/
+*.log
+my-*.json
+my-private-guard*.js

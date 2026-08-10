@@ -1,0 +1,9 @@
+[
+  { "label": "plain curl to file",     "command": "curl -o out.json https://api.example.invalid/data" },
+  { "label": "curl piped to jq",       "command": "curl -s https://api.example.invalid/x | jq .name" },
+  { "label": "grep in a pager",        "command": "cat log.txt | grep ERROR | less" },
+  { "label": "registry install",       "command": "npm install lodash" },
+  { "label": "the word bash in prose", "command": "echo 'run this in bash later'" },
+  { "label": "download then inspect",  "command": "curl -o s.sh https://x.invalid/s && cat s.sh" },
+  { "label": "git status",             "command": "ls -la && git status" }
+]

