@@ -7,7 +7,7 @@
 ![dependencies](https://img.shields.io/badge/dependencies-0-2ea44f?style=flat-square)
 [![License](https://img.shields.io/github/license/adamcdowell/guard-test-harness?style=flat-square)](./LICENSE)
 
-**An evaluation rig for command-guarding functions — attacks, benign near-misses, padding, and drift, with a measured false-positive rate. Publish the harness, not the rules.**
+**An evaluation rig for command-guarding functions. Publish the harness, not the rules.**
 
 If you run autonomous agents that execute shell commands, you probably have (or
 need) a guard: a function that blocks `curl | sh` and its relatives before they

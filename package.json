@@ -1,7 +1,7 @@
 {
   "name": "guard-test-harness",
   "version": "0.0.0",
-  "description": "An evaluation rig for command-guarding functions — attacks, benign near-misses, padding, and drift, with a measured false-positive rate. Publish the harness, not the rules.",
+  "description": "An evaluation rig for command-guarding functions. Publish the harness, not the rules.",
   "license": "MIT",
   "type": "commonjs",
   "repository": {
