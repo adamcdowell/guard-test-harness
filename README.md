@@ -54,9 +54,18 @@ describes a toy guard on purpose.
 - **Latency budget.** Every call's wall-time is measured against a ceiling (a
   post-call measurement, not a hard timeout — the guard runs in-process). A
   guard slow enough to time out is a guard that fails open, so "measurably too
-  slow" is a finding, not a footnote. `test_redos.js` feeds pathological long
-  inputs and asserts per-byte cost stays roughly flat, catching the
-  catastrophic-backtracking failure mode specifically.
+  slow" is a finding, not a footnote. `test_redos.js` is a **shape probe**, and
+  worth stating precisely: it grows *one* input family (long runs of repeated
+  characters) across a 16x size range and asserts per-byte cost stays roughly
+  flat. A quadratic matcher fails it loudly — its negative control proves that.
+  What it cannot do is clear a guard globally: a matcher that backtracks on some
+  other character class passes it clean. I checked, rather than assuming —
+  `/(?:-+)+Z/` takes ~6.6 seconds on thirty dashes and still scores near-flat
+  (~1.1-1.2x) on this probe — a catastrophic backtracker the shape test waves
+  through, because dashes are not the family it grows. Timings are machine- and
+  warm-up-dependent; the ratio is the point, not the digits. Your
+  guard's pathological family belongs in your fixtures; the harness can only
+  supply the method.
 - **Coverage and drift**, via the four classes above.
 
 ## Quickstart
@@ -67,7 +76,7 @@ Node >= 18, zero dependencies. Nothing to install — clone and run.
 # Run the example guard through the full harness (this is also the worked example)
 node test_harness.js
 
-# Assert the guard stays linear on pathological inputs (ReDoS budget)
+# Shape probe: per-byte cost stays flat as one input family grows (+ its negative control)
 node test_redos.js
 
 # Or both, the way CI runs them
@@ -87,7 +96,7 @@ max latency: 0.1ms  (budget 25ms, post-call)
 
 ✓ clean
 
-test_harness: worked example + 6 negative controls all passed
+test_harness: worked example + 8 negative controls all passed
 ```
 
 **Those bundled fixtures are a smoke test, not a measurement.** 17 cases total,
@@ -99,10 +108,13 @@ shipping the rig instead of a number — the harness doesn't change, only the
 fixtures do. A repo that argues people report false-positive rates dishonestly
 should not quote one of its own as evidence.
 
-`test_harness.js` also runs six negative controls — one per finding bucket —
-that prove the harness reports `clean: false` when a guard misses an attack,
-blocks a benign command, throws, or returns an invalid verdict. A harness you
-can't watch fail is one you can't trust.
+`test_harness.js` also runs eight negative controls: one per finding bucket —
+proving the harness reports `clean: false` when a guard misses an attack, lets a
+padded attack through, blocks a benign command, silently closes a documented
+gap, runs over the latency budget, throws, or returns an invalid verdict — plus
+one structural control asserting `evaluate` throws on a missing fixture class
+rather than reporting a vacuous pass. A harness you can't watch fail is one you
+can't trust.
 
 ## Wiring in your own guard
 
