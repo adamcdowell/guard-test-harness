@@ -1,3 +1,5 @@
+<div align=right>Table of Contents ↗️</div>
+
 # guard-test-harness
 
 [![ci](https://github.com/adamcdowell/guard-test-harness/actions/workflows/ci.yml/badge.svg)](https://github.com/adamcdowell/guard-test-harness/actions/workflows/ci.yml)
@@ -149,4 +151,4 @@ budget, and a gap list that can't drift silently.
 
 ## License
 
-MIT
+MIT © Adam McDowell — see [LICENSE](./LICENSE).
