@@ -1,0 +1,18 @@
+{
+  "name": "guard-test-harness",
+  "version": "0.0.0",
+  "description": "A test rig for command-guarding functions — the evaluation, not the guard.",
+  "license": "MIT",
+  "type": "commonjs",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/adamcdowell/guard-test-harness.git"
+  },
+  "scripts": {
+    "test": "node test_harness.js && node test_redos.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {}
+}
