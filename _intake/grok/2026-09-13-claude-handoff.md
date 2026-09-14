@@ -35,6 +35,13 @@
    ```
    Alternative (hosted, paid): Linked API — `codex mcp add linkedapi --url "https://mcp.linkedapi.io?linked-api-token=...&identification-token=...&client=codex"`. Prefer the free browser-session plugin first.
 
+## This week's to-dos (personal / planning)
+
+- **Call back Rick Rodriguez** — voicemail 2026-09-13 from +1 (847) 382-2600, Barrington, IL. Wants to schedule the annual review and go over required minimum distribution (RMD). Callback number: 847-382-2600. Adam already recognized the call; treat as a real advisor appointment, not spam triage.
+- Confirm Fairlife / other applications already sent before resending.
+- Keep Tue 15 AI Tinkerers as the demo slot; MeasureCamp Sat 19 is locked.
+- Site opening work stays protected; Holds is a window, not wallpaper.
+
 ## Repos currently on GitHub (public)
 
 - **verify-stage** — agent fleet for vetting untrusted repos. 4 files: workflow.js, README, CASE-STUDY, LICENSE.
