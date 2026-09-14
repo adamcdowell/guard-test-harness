@@ -23,6 +23,18 @@
 
 3. **Agent loop is hand-rolled, not LangChain.** verify-stage runs a fleet via Claude Code's `agent()` / `pipeline()` / `parallel()` — safety gate, extraction, adversarial red-team, 24 agents, structured JSON, read-only rules. frozen-ruler is pure Python BM25 + dense + RRF with frozen sha256 benchmarks. guard-test-harness is a zero-dependency Node eval rig. No `langchain` imports anywhere. The pattern (model reasons → calls tools → loops) matches what LangChain wraps, but it is written directly on Claude Code. That is the stronger story for the LangChain Deployed Engineer role.
 
+4. **Set up Codex for LinkedIn.** LinkedIn has no official MCP server. Use the community one that ships a Codex plugin: stickerdaniel/linkedin-mcp-server. It reads your logged-in browser session (no official API keys needed) and exposes job search, profiles, companies, and messaging. Install:
+   ```bash
+   codex plugin marketplace add stickerdaniel/linkedin-mcp-server
+   codex plugin add linkedin-mcp-server@linkedin-mcp-server
+   ```
+   On first authenticated call it opens a LinkedIn login window; session is cached under `~/.linkedin-mcp`. Disable the bundled MCP independently in `~/.codex/config.toml` if needed:
+   ```toml
+   [plugins."linkedin-mcp-server".mcp_servers.linkedin]
+   enabled = false
+   ```
+   Alternative (hosted, paid): Linked API — `codex mcp add linkedapi --url "https://mcp.linkedapi.io?linked-api-token=...&identification-token=...&client=codex"`. Prefer the free browser-session plugin first.
+
 ## Repos currently on GitHub (public)
 
 - **verify-stage** — agent fleet for vetting untrusted repos. 4 files: workflow.js, README, CASE-STUDY, LICENSE.
